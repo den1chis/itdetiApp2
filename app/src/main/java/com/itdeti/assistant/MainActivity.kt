@@ -68,8 +68,10 @@ class MainActivity : AppCompatActivity() {
             IntentFilter("com.itdeti.NOTIFICATION_RECEIVED"),
             RECEIVER_EXPORTED
         )
-        checkPermissionStatus()
-        requestExactAlarmPermission()
+        val listenerGranted = checkPermissionStatus()
+        if (listenerGranted) {
+            requestExactAlarmPermission()
+        }
     }
 
     override fun onPause() {
@@ -102,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkPermissionStatus() {
+    private fun checkPermissionStatus(): Boolean {
         val granted = NotificationManagerCompat
             .getEnabledListenerPackages(this)
             .contains(packageName)
@@ -111,6 +113,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Выдайте доступ к уведомлениям!", Toast.LENGTH_LONG).show()
             startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
         }
+        return granted
     }
 
     private fun requestExactAlarmPermission() {
