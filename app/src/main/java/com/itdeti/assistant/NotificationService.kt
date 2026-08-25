@@ -236,7 +236,6 @@ class NotificationService : NotificationListenerService() {
 
     override fun onDestroy() {
         scheduleSyncJob?.cancel()
-        scope.coroutineContext.cancel()
         super.onDestroy()
     }
 
