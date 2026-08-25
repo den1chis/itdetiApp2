@@ -14,6 +14,9 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -32,6 +35,7 @@ class NotificationService : NotificationListenerService() {
         private const val PASSWORD = "GhjcnjqDen2552!"
         private const val ALERT_CHANNEL_ID = "itdeti_alerts"
         private const val ALERT_NOTIFICATION_ID = 2001
+        private const val SCHEDULE_SYNC_INTERVAL_MS = 5 * 60 * 1000L
         private val TARGET_PACKAGES = setOf(
             "com.whatsapp",
             "com.whatsapp.w4b",
@@ -50,11 +54,14 @@ class NotificationService : NotificationListenerService() {
 
     private val scope = CoroutineScope(Dispatchers.IO)
     private var authToken: String = ""
+    private var scheduleSyncJob: Job? = null
 
     override fun onCreate() {
         super.onCreate()
         startForegroundService()
         createAlertChannel()
+        ScheduleNotificationReceiver.createChannel(this)
+        startScheduleSync()
         Log.d(TAG, "NotificationService started")
     }
 
@@ -93,6 +100,16 @@ class NotificationService : NotificationListenerService() {
         sendBroadcast(broadcastIntent)
 
         sendToServer(source, title, body)
+    }
+
+    private fun startScheduleSync() {
+        scheduleSyncJob?.cancel()
+        scheduleSyncJob = scope.launch {
+            while (isActive) {
+                ScheduleReminderManager.sync(applicationContext)
+                delay(SCHEDULE_SYNC_INTERVAL_MS)
+            }
+        }
     }
 
     private fun saveToLog(source: String, sender: String, message: String) {
@@ -201,6 +218,9 @@ class NotificationService : NotificationListenerService() {
     override fun onListenerConnected() {
         super.onListenerConnected()
         Log.d(TAG, "Listener connected")
+        scope.launch {
+            ScheduleReminderManager.sync(applicationContext)
+        }
     }
 
     override fun onListenerDisconnected() {
@@ -212,6 +232,12 @@ class NotificationService : NotificationListenerService() {
         super.onTaskRemoved(rootIntent)
         val restartIntent = Intent(applicationContext, NotificationService::class.java)
         startService(restartIntent)
+    }
+
+    override fun onDestroy() {
+        scheduleSyncJob?.cancel()
+        scope.coroutineContext.cancel()
+        super.onDestroy()
     }
 
     private fun startForegroundService() {
