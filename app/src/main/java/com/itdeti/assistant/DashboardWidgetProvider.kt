@@ -8,7 +8,9 @@ import android.content.Intent
 class DashboardWidgetProvider : AppWidgetProvider() {
     override fun onUpdate(context: Context, manager: AppWidgetManager, ids: IntArray) {
         ScheduleWidgetRenderer.updateProvider(
-            context, manager, DashboardWidgetProvider::class.java,
+            context,
+            manager,
+            DashboardWidgetProvider::class.java,
             ScheduleWidgetRenderer.Variant.DASHBOARD
         )
     }
@@ -16,7 +18,9 @@ class DashboardWidgetProvider : AppWidgetProvider() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == "com.itdeti.WIDGET_RANGE") {
             ScheduleWidgetRenderer.handleRange(
-                context, intent, DashboardWidgetProvider::class.java,
+                context,
+                intent,
+                DashboardWidgetProvider::class.java,
                 ScheduleWidgetRenderer.Variant.DASHBOARD
             )
             return
@@ -25,10 +29,15 @@ class DashboardWidgetProvider : AppWidgetProvider() {
     }
 
     override fun onDeleted(context: Context, ids: IntArray) {
-        context.getSharedPreferences("itdeti_schedule", Context.MODE_PRIVATE).edit().apply {
-            ids.forEach { remove("widget_range_$it") }
-            apply()
+        val editor = context
+            .getSharedPreferences("itdeti_schedule", Context.MODE_PRIVATE)
+            .edit()
+
+        ids.forEach { widgetId ->
+            editor.remove("widget_range_$widgetId")
         }
-        super.onDeleted(context)
+
+        editor.apply()
+        super.onDeleted(context, ids)
     }
 }
