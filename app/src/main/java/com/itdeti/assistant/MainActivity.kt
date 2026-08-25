@@ -22,6 +22,11 @@ import androidx.core.app.NotificationManagerCompat
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        private const val EXTRA_EVENT_ID = "event_id"
+        private const val WEB_URL = "https://den1chis.github.io/itdetiWeb"
+    }
+
     private lateinit var webView: WebView
     private lateinit var prefs: SharedPreferences
 
@@ -58,7 +63,26 @@ class MainActivity : AppCompatActivity() {
         settings.loadWithOverviewMode = true
         settings.useWideViewPort = true
         settings.setSupportZoom(true)
-        webView.loadUrl("https://den1chis.github.io/itdetiWeb")
+        loadRequestedPage(intent)
+    }
+
+    private fun loadRequestedPage(sourceIntent: Intent?) {
+        val eventId = sourceIntent?.getStringExtra(EXTRA_EVENT_ID)
+        if (eventId.isNullOrBlank()) {
+            webView.loadUrl(WEB_URL)
+            return
+        }
+
+        val encodedId = Uri.encode(eventId)
+        webView.loadUrl("$WEB_URL?event_id=$encodedId")
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        if (::webView.isInitialized) {
+            loadRequestedPage(intent)
+        }
     }
 
     override fun onResume() {
