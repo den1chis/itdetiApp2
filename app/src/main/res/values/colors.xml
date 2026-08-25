@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="widget_surface">#F7F9FC</color>
+    <color name="widget_card">#FFFFFF</color>
+    <color name="widget_border">#E3E8F0</color>
+    <color name="widget_tab_bg">#EEF2F7</color>
+    <color name="widget_accent">#356AE6</color>
+    <color name="widget_text">#172033</color>
+    <color name="widget_muted">#758197</color>
 </resources>
