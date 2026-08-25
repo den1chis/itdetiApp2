@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">itdeti Assistant</string>
+    <string name="widget_description">Расписание ITdeti на сегодня</string>
 </resources>
