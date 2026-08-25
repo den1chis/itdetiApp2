@@ -42,28 +42,35 @@
                 android:resource="@xml/notification_service_config" />
         </service>
 
-        <receiver
-            android:name=".BootReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
+        <receiver android:name=".BootReceiver" android:exported="true">
+            <intent-filter><action android:name="android.intent.action.BOOT_COMPLETED" /></intent-filter>
         </receiver>
 
-        <receiver
-            android:name=".ScheduleNotificationReceiver"
-            android:exported="false" />
+        <receiver android:name=".ScheduleNotificationReceiver" android:exported="false" />
 
-        <receiver
-            android:name=".ScheduleWidgetProvider"
-            android:exported="false">
+        <receiver android:name=".ScheduleWidgetProvider" android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.itdeti.WIDGET_REFRESH" />
+                <action android:name="com.itdeti.WIDGET_RANGE" />
             </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/schedule_widget_info" />
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/schedule_widget_info" />
+        </receiver>
+
+        <receiver android:name=".CompactWidgetProvider" android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.itdeti.WIDGET_RANGE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_compact_info" />
+        </receiver>
+
+        <receiver android:name=".DashboardWidgetProvider" android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.itdeti.WIDGET_RANGE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_dashboard_info" />
         </receiver>
 
     </application>
