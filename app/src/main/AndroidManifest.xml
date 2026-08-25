@@ -54,5 +54,17 @@
             android:name=".ScheduleNotificationReceiver"
             android:exported="false" />
 
+        <receiver
+            android:name=".ScheduleWidgetProvider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.itdeti.WIDGET_REFRESH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/schedule_widget_info" />
+        </receiver>
+
     </application>
 </manifest>
