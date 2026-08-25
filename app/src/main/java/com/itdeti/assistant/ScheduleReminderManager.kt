@@ -26,6 +26,7 @@ object ScheduleReminderManager {
     private const val PASSWORD = "GhjcnjqDen2552!"
     private const val PREFS = "itdeti_schedule"
     private const val PREF_SCHEDULED_IDS = "scheduled_ids"
+    private const val PREF_ITEMS = "schedule_items"
     private const val REMINDER_MINUTES = 30L
 
     private val client = OkHttpClient.Builder()
@@ -59,7 +60,13 @@ object ScheduleReminderManager {
                     return
                 }
 
+                context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+                    .edit()
+                    .putString(PREF_ITEMS, body)
+                    .apply()
+
                 scheduleItems(context, JSONArray(body))
+                ScheduleWidgetProvider.updateAll(context)
             }
         } catch (e: Exception) {
             Log.e(TAG, "Schedule sync error", e)
