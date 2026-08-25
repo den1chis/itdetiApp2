@@ -1,10 +1,15 @@
 package com.itdeti.assistant
 
+import android.Manifest
+import android.app.AlarmManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.webkit.WebSettings
@@ -12,6 +17,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         webView = findViewById(R.id.webView)
         setupWebView()
 
+        startNotificationService()
+        requestNotificationPermission()
         checkPermissionStatus()
     }
 
@@ -61,6 +69,7 @@ class MainActivity : AppCompatActivity() {
             RECEIVER_EXPORTED
         )
         checkPermissionStatus()
+        requestExactAlarmPermission()
     }
 
     override fun onPause() {
@@ -76,6 +85,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun startNotificationService() {
+        val serviceIntent = Intent(this, NotificationService::class.java)
+        startForegroundService(serviceIntent)
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                100
+            )
+        }
+    }
+
     private fun checkPermissionStatus() {
         val granted = NotificationManagerCompat
             .getEnabledListenerPackages(this)
@@ -84,6 +110,34 @@ class MainActivity : AppCompatActivity() {
         if (!granted) {
             Toast.makeText(this, "Выдайте доступ к уведомлениям!", Toast.LENGTH_LONG).show()
             startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
+        }
+    }
+
+    private fun requestExactAlarmPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return
+
+        val alarmManager = getSystemService(AlarmManager::class.java)
+        if (alarmManager.canScheduleExactAlarms()) return
+
+        val promptPrefs = getSharedPreferences("itdeti_settings", Context.MODE_PRIVATE)
+        if (promptPrefs.getBoolean("exact_alarm_prompted", false)) return
+
+        promptPrefs.edit().putBoolean("exact_alarm_prompted", true).apply()
+        Toast.makeText(
+            this,
+            "Разрешите точные будильники для напоминаний за 30 минут",
+            Toast.LENGTH_LONG
+        ).show()
+
+        try {
+            startActivity(
+                Intent(
+                    Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM,
+                    Uri.parse("package:$packageName")
+                )
+            )
+        } catch (_: Exception) {
+            startActivity(Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM))
         }
     }
 }
