@@ -152,7 +152,9 @@ object ScheduleWidgetRenderer {
                 return@forEachIndexed
             }
             setVisibility(views, rowId, View.VISIBLE)
-            val type = if (item.optString("item_type") == "lesson") "УРОК" else "СОБЫТИЕ"
+
+            val isLesson = item.optString("item_type") == "lesson"
+            val type = if (isLesson) "УРОК" else "СОБЫТИЕ"
             val prefix = if (range == RANGE_WEEK) formatDateTime(item) else formatTime(item)
             val student = item.optString("student_name", "").takeIf { it.isNotBlank() && it != "null" }
             val title = item.optString("title", "Событие")
@@ -164,7 +166,18 @@ object ScheduleWidgetRenderer {
                 append(title)
                 if (student != null && !title.contains(student)) append("  ·  ").append(student)
             }
+
             setText(views, rowId, text)
+            views.setInt(
+                rowId,
+                "setBackgroundResource",
+                if (isLesson) R.drawable.widget_lesson_card else R.drawable.widget_event_card
+            )
+            views.setTextColor(
+                rowId,
+                if (isLesson) 0xFFF5F7FF.toInt() else 0xFFE4DFFF.toInt()
+            )
+
             val clickIntent = Intent(context, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                 putExtra(EXTRA_EVENT_ID, item.optString("item_id"))
@@ -206,7 +219,7 @@ object ScheduleWidgetRenderer {
                 RANGE_TOMORROW -> "Завтра"
                 else -> "Неделя"
             })
-            views.setTextColor(id, if (value == range) 0xFFFFFFFF.toInt() else 0xFF7A8494.toInt())
+            views.setTextColor(id, if (value == range) 0xFFFFFFFF.toInt() else 0xFF73819B.toInt())
             views.setInt(id, "setBackgroundResource", if (value == range) R.drawable.widget_tab_selected else R.drawable.widget_tab)
             setClick(views, id, buildRangeIntent(context, widgetId, value, variant))
         }
@@ -220,7 +233,6 @@ object ScheduleWidgetRenderer {
         return if (minutes < 60) "$minutes мин" else "${minutes / 60} ч"
     }
 
-    private fun displayStudent(item: JSONObject): String = item.optString("student_name", "")
     private fun setText(v: RemoteViews, id: Int, value: String) = v.setTextViewText(id, value)
     private fun setVisibility(v: RemoteViews, id: Int, value: Int) = v.setViewVisibility(id, value)
     private fun setClick(v: RemoteViews, id: Int, pending: PendingIntent) = v.setOnClickPendingIntent(id, pending)
