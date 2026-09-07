@@ -1,12 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="widget_surface">#F7F9FC</color>
-    <color name="widget_card">#FFFFFF</color>
-    <color name="widget_border">#E3E8F0</color>
-    <color name="widget_tab_bg">#EEF2F7</color>
-    <color name="widget_accent">#356AE6</color>
-    <color name="widget_text">#172033</color>
-    <color name="widget_muted">#758197</color>
+
+    <!-- ITdeti dark widget palette -->
+    <color name="widget_surface">#0B1020</color>
+    <color name="widget_surface_2">#10182A</color>
+    <color name="widget_card">#141E33</color>
+    <color name="widget_card_2">#18243C</color>
+    <color name="widget_border">#263653</color>
+    <color name="widget_tab_bg">#111A2D</color>
+    <color name="widget_accent">#6EA8FF</color>
+    <color name="widget_accent_2">#8B7CFF</color>
+    <color name="widget_cyan">#54D6FF</color>
+    <color name="widget_green">#4ADEA8</color>
+    <color name="widget_orange">#FFB86B</color>
+    <color name="widget_text">#F5F7FF</color>
+    <color name="widget_text_secondary">#C1CBE0</color>
+    <color name="widget_muted">#73819B</color>
 </resources>
