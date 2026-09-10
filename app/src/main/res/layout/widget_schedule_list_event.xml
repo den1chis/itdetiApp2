@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_schedule_event_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="40dp"
+    android:paddingStart="11dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="11dp"
+    android:paddingBottom="8dp"
+    android:layout_marginBottom="5dp"
+    android:gravity="center_vertical"
+    android:textColor="#FFFFFFFF"
+    android:textSize="11sp"
+    android:maxLines="2"
+    android:ellipsize="end" />
