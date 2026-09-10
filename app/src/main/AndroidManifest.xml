@@ -57,6 +57,14 @@
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/schedule_widget_info" />
         </receiver>
 
+        <receiver android:name=".ScheduleListWidgetProvider" android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.itdeti.WIDGET_REFRESH" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_schedule_list_info" />
+        </receiver>
+
         <receiver android:name=".CompactWidgetProvider" android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
