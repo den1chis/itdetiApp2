@@ -7,7 +7,10 @@ import android.content.Intent
 
 class ScheduleWidgetProvider : AppWidgetProvider() {
     companion object {
-        fun updateAll(context: Context) = ScheduleWidgetRenderer.updateAll(context)
+        fun updateAll(context: Context) {
+            ScheduleWidgetRenderer.updateAll(context)
+            ScheduleListWidgetProvider.updateAll(context)
+        }
     }
 
     override fun onUpdate(context: Context, manager: AppWidgetManager, ids: IntArray) {
@@ -31,7 +34,7 @@ class ScheduleWidgetProvider : AppWidgetProvider() {
         }
         super.onReceive(context, intent)
         if (intent.action == "com.itdeti.WIDGET_REFRESH") {
-            ScheduleWidgetRenderer.updateAll(context)
+            updateAll(context)
         }
     }
 
