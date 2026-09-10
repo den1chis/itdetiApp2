@@ -4,4 +4,5 @@
     <string name="widget_compact_description">ITdeti — компактный виджет ближайших событий</string>
     <string name="widget_agenda_description">ITdeti — расписание на сегодня, завтра или неделю</string>
     <string name="widget_dashboard_description">ITdeti — большой dashboard расписания</string>
+    <string name="widget_schedule_list_description">ITdeti — расписание списком на 7 дней</string>
 </resources>
