@@ -4,8 +4,11 @@
     android:minHeight="180dp"
     android:minResizeWidth="180dp"
     android:minResizeHeight="180dp"
+    android:targetCellWidth="3"
+    android:targetCellHeight="3"
     android:updatePeriodMillis="1800000"
     android:initialLayout="@layout/widget_schedule_list"
+    android:previewLayout="@layout/widget_schedule_list_preview"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen"
     android:description="@string/widget_schedule_list_description" />
