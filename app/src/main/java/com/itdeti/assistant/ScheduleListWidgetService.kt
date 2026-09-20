@@ -78,9 +78,9 @@ private class ScheduleListRemoteViewsFactory(
         if (row.type == TYPE_DAY) {
             val views = RemoteViews(context.packageName, R.layout.widget_schedule_list_day)
             val title = if (row.date == LocalDate.now()) {
-                "сегодня, \${row.date.dayOfMonth} \${row.date.month.getDisplayName(TextStyle.FULL, russian)}"
+                "сегодня, ${row.date.dayOfMonth} ${row.date.month.getDisplayName(TextStyle.FULL, russian)}"
             } else {
-                "\${row.date.dayOfWeek.getDisplayName(TextStyle.FULL, russian)}, \${row.date.dayOfMonth} \${row.date.month.getDisplayName(TextStyle.FULL, russian)}"
+                "${row.date.dayOfWeek.getDisplayName(TextStyle.FULL, russian)}, ${row.date.dayOfMonth} ${row.date.month.getDisplayName(TextStyle.FULL, russian)}"
             }
             views.setTextViewText(R.id.widget_schedule_day_text, title.lowercase(russian))
             return views
@@ -93,7 +93,7 @@ private class ScheduleListRemoteViewsFactory(
         val end = parseInstant(item.optString("end_time"))?.atZone(ZoneId.systemDefault())
         val time = when {
             start == null -> "--:--"
-            end != null -> "\${start.format(timeFormatter)}–\${end.format(timeFormatter)}"
+            end != null -> "${start.format(timeFormatter)}–${end.format(timeFormatter)}"
             else -> start.format(timeFormatter)
         }
 
@@ -136,7 +136,7 @@ private class ScheduleListRemoteViewsFactory(
         val fillInIntent = Intent().apply {
             putExtra("event_id", item.optString("item_id"))
             putExtra("open_schedule", true)
-            putExtra("event_query", "?event_id=\${item.optString("item_id")}")
+            putExtra("event_query", "?event_id=${item.optString("item_id")}")
         }
         views.setOnClickFillInIntent(R.id.widget_schedule_event_content, fillInIntent)
         views.setOnClickFillInIntent(R.id.widget_schedule_event_color, fillInIntent)
