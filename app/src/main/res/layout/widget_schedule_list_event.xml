@@ -1,16 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/widget_schedule_event_text"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="40dp"
-    android:paddingStart="11dp"
-    android:paddingTop="8dp"
-    android:paddingEnd="11dp"
-    android:paddingBottom="8dp"
-    android:layout_marginBottom="5dp"
+    android:minHeight="48dp"
+    android:layout_marginBottom="6dp"
+    android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:textColor="#FFFFFFFF"
-    android:textSize="11sp"
-    android:maxLines="2"
-    android:ellipsize="end" />
+    android:background="#F8FAFC"
+    android:paddingStart="0dp"
+    android:paddingEnd="10dp"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp">
+
+    <TextView
+        android:id="@+id/widget_schedule_event_color"
+        android:layout_width="6dp"
+        android:layout_height="match_parent"
+        android:minHeight="34dp"
+        android:layout_marginEnd="10dp"
+        android:background="#4F46E5"
+        android:text="" />
+
+    <LinearLayout
+        android:id="@+id/widget_schedule_event_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/widget_schedule_event_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#111827"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/widget_schedule_event_meta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="#111827"
+            android:textSize="10sp"
+            android:maxLines="2"
+            android:ellipsize="end" />
+
+    </LinearLayout>
+
+</LinearLayout>
