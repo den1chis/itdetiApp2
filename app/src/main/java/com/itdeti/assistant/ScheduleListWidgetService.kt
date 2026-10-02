@@ -107,12 +107,12 @@ private class ScheduleListRemoteViewsFactory(
 
         val meta = if (isLesson) {
             if (item.optString("lesson_kind") == "masterclass") {
-                "Мастер-класс · \$time"
+                "Мастер-класс · $time"
             } else {
                 val course = item.optString("course", "")
                     .takeIf { it.isNotBlank() && it != "null" }
                     ?: "Урок"
-                "\$course · \$time"
+                "$course · $time"
             }
         } else {
             val eventMeta = item.optString("location", "")
@@ -120,7 +120,7 @@ private class ScheduleListRemoteViewsFactory(
                 ?: item.optString("event_type", "")
                     .takeIf { it.isNotBlank() && it != "null" }
                 ?: ""
-            if (eventMeta.isNotBlank()) "\$eventMeta · \$time" else time
+            if (eventMeta.isNotBlank()) "$eventMeta · $time" else time
         }
 
         views.setTextViewText(
