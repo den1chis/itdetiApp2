@@ -2,21 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="48dp"
-    android:layout_marginBottom="6dp"
+    android:minHeight="54dp"
+    android:layout_marginBottom="7dp"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:background="#F8FAFC"
+    android:background="@drawable/widget_schedule_event_background"
     android:paddingStart="0dp"
     android:paddingEnd="10dp"
-    android:paddingTop="7dp"
-    android:paddingBottom="7dp">
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/widget_schedule_event_color"
         android:layout_width="6dp"
         android:layout_height="match_parent"
-        android:minHeight="34dp"
+        android:minHeight="38dp"
+        android:layout_marginStart="1dp"
         android:layout_marginEnd="10dp"
         android:background="#4F46E5"
         android:text="" />
@@ -26,14 +27,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp">
 
         <TextView
             android:id="@+id/widget_schedule_event_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#111827"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:textStyle="bold"
             android:maxLines="1"
             android:ellipsize="end" />
@@ -42,8 +45,8 @@
             android:id="@+id/widget_schedule_event_meta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:textColor="#111827"
+            android:layout_marginTop="3dp"
+            android:textColor="#374151"
             android:textSize="10sp"
             android:maxLines="2"
             android:ellipsize="end" />
