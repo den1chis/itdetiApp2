@@ -7,7 +7,7 @@
     android:layout_marginBottom="7dp"
     android:orientation="vertical"
     android:gravity="center_vertical"
-    android:background="#4F46E5"
+    android:background="@drawable/widget_schedule_event_background"
     android:paddingStart="12dp"
     android:paddingEnd="12dp"
     android:paddingTop="9dp"
