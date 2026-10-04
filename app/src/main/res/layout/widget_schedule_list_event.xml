@@ -1,32 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_schedule_event_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="54dp"
     android:layout_marginBottom="7dp"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:gravity="center_vertical"
-    android:background="@drawable/widget_schedule_event_background"
-    android:paddingStart="0dp"
-    android:paddingEnd="10dp"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp">
-
-    <TextView
-        android:id="@+id/widget_schedule_event_color"
-        android:layout_width="6dp"
-        android:layout_height="match_parent"
-        android:minHeight="38dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="10dp"
-        android:background="#4F46E5"
-        android:text="" />
+    android:background="#4F46E5"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingTop="9dp"
+    android:paddingBottom="9dp">
 
     <LinearLayout
         android:id="@+id/widget_schedule_event_content"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:orientation="vertical"
         android:paddingTop="1dp"
         android:paddingBottom="1dp">
@@ -35,7 +25,7 @@
             android:id="@+id/widget_schedule_event_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#111827"
+            android:textColor="#FFFFFF"
             android:textSize="13sp"
             android:textStyle="bold"
             android:maxLines="1"
@@ -46,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:textColor="#374151"
+            android:textColor="#EDEFFB"
             android:textSize="10sp"
             android:maxLines="2"
             android:ellipsize="end" />
