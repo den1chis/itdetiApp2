@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
+import android.content.res.ColorStateList
 import org.json.JSONArray
 import org.json.JSONObject
 import java.time.Instant
@@ -133,10 +134,10 @@ private class ScheduleListRemoteViewsFactory(
         val color = parseColor(item.optString("color"), fallback)
         val textColor = readableTextColor(color)
 
-        views.setInt(
+        views.setColorStateList(
             R.id.widget_schedule_event_root,
-            "setBackgroundColor",
-            color
+            "setBackgroundTintList",
+            ColorStateList.valueOf(color)
         )
         views.setTextColor(R.id.widget_schedule_event_title, textColor)
         views.setTextColor(R.id.widget_schedule_event_meta, textColor)
