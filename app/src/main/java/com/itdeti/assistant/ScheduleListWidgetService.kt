@@ -200,3 +200,4 @@ private class ScheduleListRemoteViewsFactory(
 
         return if (luminance > 0.62) Color.rgb(17, 24, 39) else Color.WHITE
     }
+}
