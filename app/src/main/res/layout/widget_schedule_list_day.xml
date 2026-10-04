@@ -8,7 +8,7 @@
     android:paddingEnd="4dp"
     android:paddingBottom="5dp"
     android:textColor="#B8C1D1"
-    android:textSize="11sp"
+    android:textSize="13sp"
     android:textStyle="normal"
     android:maxLines="1"
     android:ellipsize="end"
