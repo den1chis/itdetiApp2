@@ -131,7 +131,15 @@ private class ScheduleListRemoteViewsFactory(
 
         val fallback = if (isLesson) "#4F46E5" else "#64748B"
         val color = parseColor(item.optString("color"), fallback)
-        views.setInt(R.id.widget_schedule_event_color, "setBackgroundColor", color)
+        val textColor = readableTextColor(color)
+
+        views.setInt(
+            R.id.widget_schedule_event_root,
+            "setBackgroundColor",
+            color
+        )
+        views.setTextColor(R.id.widget_schedule_event_title, textColor)
+        views.setTextColor(R.id.widget_schedule_event_meta, textColor)
 
         val fillInIntent = Intent().apply {
             putExtra("event_id", item.optString("item_id"))
@@ -139,8 +147,6 @@ private class ScheduleListRemoteViewsFactory(
             putExtra("event_query", "?event_id=${item.optString("item_id")}")
         }
         views.setOnClickFillInIntent(R.id.widget_schedule_event_content, fillInIntent)
-        views.setOnClickFillInIntent(R.id.widget_schedule_event_color, fillInIntent)
-
         return views
     }
 
@@ -181,4 +187,16 @@ private class ScheduleListRemoteViewsFactory(
     } catch (_: IllegalArgumentException) {
         Color.parseColor(fallback)
     }
-}
+
+    private fun readableTextColor(background: Int): Int {
+        val red = Color.red(background) / 255.0
+        val green = Color.green(background) / 255.0
+        val blue = Color.blue(background) / 255.0
+
+        val luminance =
+            0.2126 * red +
+            0.7152 * green +
+            0.0722 * blue
+
+        return if (luminance > 0.62) Color.rgb(17, 24, 39) else Color.WHITE
+    }
