@@ -1,54 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/widget_task_root"
+<!-- Ночь 6: внешний контейнер даёт промежуток между карточками. В ListView виджета margin корня
+     элемента игнорируется, поэтому карточки касались и налезали друг на друга. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="44dp"
-    android:layout_marginBottom="6dp"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:background="@drawable/widget_card"
-    android:paddingStart="10dp"
-    android:paddingEnd="12dp"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp">
-
-    <TextView
-        android:id="@+id/widget_task_check"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:gravity="center"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/widget_task_check" />
+    android:paddingBottom="7dp">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:id="@+id/widget_task_root"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginStart="10dp"
-        android:orientation="vertical">
+        android:minHeight="44dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/widget_card"
+        android:paddingStart="10dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
         <TextView
-            android:id="@+id/widget_task_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/widget_task_check"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textStyle="bold"
             android:textColor="#FFFFFF"
-            android:textSize="13sp"
-            android:maxLines="2"
-            android:ellipsize="end" />
+            android:background="@drawable/widget_task_check" />
 
-        <TextView
-            android:id="@+id/widget_task_meta"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:textColor="#8FA0BD"
-            android:textSize="10sp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:visibility="gone" />
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/widget_task_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+            <TextView
+                android:id="@+id/widget_task_meta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="#8FA0BD"
+                android:textSize="10sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:visibility="gone" />
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

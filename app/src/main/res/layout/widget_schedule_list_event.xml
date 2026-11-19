@@ -1,46 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/widget_schedule_event_root"
+<!-- Ночь 6: внешний контейнер даёт промежуток между карточками. В ListView виджета margin корня
+     элемента игнорируется, поэтому карточки касались и налезали друг на друга. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="54dp"
-    android:layout_marginBottom="7dp"
-    android:orientation="vertical"
-    android:gravity="center_vertical"
-    android:background="@drawable/widget_schedule_event_background"
-    android:paddingStart="12dp"
-    android:paddingEnd="12dp"
-    android:paddingTop="9dp"
-    android:paddingBottom="9dp">
+    android:paddingBottom="8dp">
 
     <LinearLayout
-        android:id="@+id/widget_schedule_event_content"
+        android:id="@+id/widget_schedule_event_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="54dp"
         android:orientation="vertical"
-        android:paddingTop="1dp"
-        android:paddingBottom="1dp">
+        android:gravity="center_vertical"
+        android:background="@drawable/widget_schedule_event_background"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="9dp"
+        android:paddingBottom="9dp">
 
-        <TextView
-            android:id="@+id/widget_schedule_event_title"
+        <LinearLayout
+            android:id="@+id/widget_schedule_event_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:ellipsize="end" />
+            android:orientation="vertical"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp">
 
-        <TextView
-            android:id="@+id/widget_schedule_event_meta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:textColor="#EDEFFB"
-            android:textSize="10sp"
-            android:maxLines="2"
-            android:ellipsize="end" />
+            <TextView
+                android:id="@+id/widget_schedule_event_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <TextView
+                android:id="@+id/widget_schedule_event_meta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:textColor="#EDEFFB"
+                android:textSize="10sp"
+                android:maxLines="2"
+                android:ellipsize="end" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

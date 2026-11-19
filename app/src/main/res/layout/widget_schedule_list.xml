@@ -4,7 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/widget_background"
-    android:padding="10dp">
+    android:paddingStart="14dp"
+    android:paddingEnd="14dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="14dp">
+    <!-- Ночь 6: отступы с учётом радиуса 28dp (и скругления One UI), чтобы вкладки и карточки не упирались в углы. -->
 
     <LinearLayout
         android:layout_width="match_parent"
