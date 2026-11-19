@@ -29,7 +29,7 @@ object ScheduleReminderManager {
     private const val PREF_ITEMS = "schedule_items"
     private const val REMINDER_MINUTES = 30L
 
-    private val client = OkHttpClient.Builder()
+    internal val client: OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .build()
@@ -38,6 +38,18 @@ object ScheduleReminderManager {
     private var authToken = ""
 
     suspend fun sync(context: Context) {
+        syncSchedule(context)
+        TaskRepository.sync(context)
+    }
+
+    /** Токен для других запросов к серверу (задачи виджета). */
+    internal fun token(): String? = getToken()
+
+    internal fun invalidateToken() {
+        authToken = ""
+    }
+
+    private fun syncSchedule(context: Context) {
         try {
             val token = getToken() ?: return
             val request = Request.Builder()

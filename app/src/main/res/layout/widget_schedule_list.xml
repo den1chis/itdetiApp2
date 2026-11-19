@@ -1,22 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/widget_background"
     android:padding="10dp">
 
-    <ListView
-        android:id="@+id/widget_schedule_list"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
-        android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false"
-        android:scrollbars="none"
-        android:overScrollMode="never"
-        android:paddingStart="2dp"
-        android:paddingEnd="2dp"
-        android:clipToPadding="false" />
+        android:layout_height="30dp"
+        android:layout_marginBottom="6dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/widget_list_tab_calendar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Календарь"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:background="@drawable/widget_tab_selected" />
+
+        <TextView
+            android:id="@+id/widget_list_tab_tasks"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:gravity="center"
+            android:text="Задачи"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="#73819B"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:background="@drawable/widget_tab" />
+
+        <TextView
+            android:id="@+id/widget_list_open"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:gravity="center"
+            android:text="↗"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#B8C1D1"
+            android:background="@drawable/widget_tab" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/widget_schedule_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            android:clipToPadding="false" />
+
+        <TextView
+            android:id="@+id/widget_list_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="Задач нет"
+            android:textSize="13sp"
+            android:textColor="#B8C1D1"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</LinearLayout>
