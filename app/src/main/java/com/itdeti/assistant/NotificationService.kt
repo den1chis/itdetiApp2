@@ -192,7 +192,7 @@ class NotificationService : NotificationListenerService() {
     private fun showPushNotification(text: String) {
         val nm = getSystemService(NotificationManager::class.java)
         val notification = NotificationCompat.Builder(this, ALERT_CHANNEL_ID)
-            .setContentTitle("itdeti Assistant")
+            .setContentTitle("ITdeti")
             .setContentText(text)
             .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setSmallIcon(R.drawable.ic_stat_itdeti)
@@ -206,7 +206,7 @@ class NotificationService : NotificationListenerService() {
     private fun createAlertChannel() {
         val channel = NotificationChannel(
             ALERT_CHANNEL_ID,
-            "itdeti Alerts",
+            "ITdeti: оповещения",
             NotificationManager.IMPORTANCE_HIGH
         ).apply {
             description = "Уведомления требующие внимания"
@@ -243,7 +243,7 @@ class NotificationService : NotificationListenerService() {
     private fun startForegroundService() {
         val channel = NotificationChannel(
             FOREGROUND_CHANNEL_ID,
-            "itdeti Background Service",
+            "ITdeti: фоновая служба",
             NotificationManager.IMPORTANCE_LOW
         ).apply { setShowBadge(false) }
 
@@ -251,7 +251,7 @@ class NotificationService : NotificationListenerService() {
         nm.createNotificationChannel(channel)
 
         val notification = NotificationCompat.Builder(this, FOREGROUND_CHANNEL_ID)
-            .setContentTitle("itdeti Assistant")
+            .setContentTitle("ITdeti")
             .setContentText("Мониторинг уведомлений активен")
             .setSmallIcon(R.drawable.ic_stat_itdeti)
             .setColor(0xFF4A90E2.toInt())
