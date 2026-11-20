@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">itdeti Assistant</string>
+    <string name="app_name">ITdeti</string>
     <string name="widget_description">ITdeti: расписание и события</string>
     <string name="widget_compact_description">ITdeti — компактный виджет ближайших событий</string>
     <string name="widget_agenda_description">ITdeti — расписание на сегодня, завтра или неделю</string>

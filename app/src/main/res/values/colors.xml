@@ -1,6 +1,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="ic_launcher_background">#4A90E2</color>
+    <color name="itdeti_blue">#4A90E2</color>
+    <color name="splash_bg">#FFFFFF</color>
 
     <!-- ITdeti dark widget palette -->
     <color name="widget_surface">#0B1020</color>
